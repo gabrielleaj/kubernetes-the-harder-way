@@ -20,7 +20,7 @@ network:
   version: 2
   bridges:
     kubr0:
-      addresses: [192.168.1.1/24]
+      addresses: [192.168.0.1/24]
 EOF
 chmod 600 /etc/netplan/99-kubenet.yaml
 netplan apply
@@ -42,7 +42,7 @@ fi
 
 iptables -t nat -N KUBENET_NAT
 iptables -t nat -A POSTROUTING -j KUBENET_NAT
-iptables -t nat -A KUBENET_NAT ! -o kubr0 -s 192.168.1.0/24 -j MASQUERADE
+iptables -t nat -A KUBENET_NAT ! -o kubr0 -s 192.168.0.0/24 -j MASQUERADE
 EOF
 chmod +x /usr/local/bin/kubenet-nat.sh
 
