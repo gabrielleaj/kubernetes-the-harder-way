@@ -11,7 +11,7 @@ if [[ "$EUID" -ne 0 ]]; then
   exit 1
 fi
 
-vmaddr=$(ip addr show | grep -Po 'inet \K192\.168\.1\.1\d+')
+vmaddr=$(ip addr show | grep -Po 'inet \K192\.168\.0\.1\d+')
 vmname=$(hostname -s)
 
 # etcd
@@ -48,7 +48,7 @@ ExecStart=/usr/local/bin/etcd \\
   --listen-client-urls https://${vmaddr}:2379,https://127.0.0.1:2379 \\
   --advertise-client-urls https://${vmaddr}:2379 \\
   --initial-cluster-token etcd-cluster-0 \\
-  --initial-cluster control0=https://192.168.1.11:2380,control1=https://192.168.1.12:2380,control2=https://192.168.1.13:2380 \\
+  --initial-cluster control0=https://192.168.0.11:2380,control1=https://192.168.0.12:2380,control2=https://192.168.0.13:2380 \\
   --initial-cluster-state new \\
   --data-dir=/var/lib/etcd
 Restart=on-failure
