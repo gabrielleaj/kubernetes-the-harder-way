@@ -20,8 +20,8 @@ case "$vmname" in
     memory=2G
     ;;
   worker*)
-    vcpus=4
-    memory=4G
+    vcpus=2
+    memory=2G
     ;;
 esac
 
